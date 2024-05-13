@@ -20,10 +20,12 @@ jobs:
         with:
           substituters: s3://mfenniak-multicorn2-nix-cache?region=us-west-2
           trusted_public_keys: mfenniak-multicorn2-nix-cache:mldk0J26tzkCmqihQKOiyuAm1HAs2CHdIZC0ESr56ZA=
-          secret_keys: null
 
-      - run: cat /home/runner/work/_temp/setup-nix-cache-action-*/post-build-hook
-      - run: cat /etc/nix/nix.conf
+      # Seems to be a bug in setup-nix-cache-action where, even though we're only providing a trusted_public_keys input
+      # and no secret_keys input, it still tries to create a post-build-hook that will push packages to the cache.  This
+      # is a hacky workaround to remove that hook.
+      - run: rm /home/runner/work/_temp/setup-nix-cache-action-*/post-build-hook
 
       # Run all the tests.
-      - run: nix build .#allTestSuites
+      # - run: nix build .#allTestSuites # FIXME: temp for testing speed
+      - run: nix build .#testSuites.test_pg12_py39
