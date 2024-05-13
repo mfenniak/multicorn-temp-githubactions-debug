@@ -7,7 +7,7 @@ CREATE SCHEMA import_dest1;
 IMPORT FOREIGN SCHEMA import_source FROM SERVER multicorn_srv INTO import_dest1;
 NOTICE:  IMPORT import_source FROM srv {} OPTIONS {} RESTRICTION: None []
 SELECT relname FROM pg_class c INNER JOIN pg_namespace n on c.relnamespace = n.oid WHERE n.nspname = 'import_dest1' ORDER BY relname;
-     relname      
+     relname
 ------------------
  imported_table_1
  imported_table_2
@@ -23,7 +23,7 @@ CREATE SCHEMA import_dest1;
 IMPORT FOREIGN SCHEMA import_source EXCEPT (imported_table_1, imported_table_3) FROM SERVER multicorn_srv INTO import_dest1;
 NOTICE:  IMPORT import_source FROM srv {} OPTIONS {} RESTRICTION: except ['imported_table_1', 'imported_table_3']
 SELECT relname FROM pg_class c INNER JOIN pg_namespace n on c.relnamespace = n.oid WHERE n.nspname = 'import_dest1';
-     relname      
+     relname
 ------------------
  imported_table_2
 (1 row)
@@ -31,11 +31,15 @@ SELECT relname FROM pg_class c INNER JOIN pg_namespace n on c.relnamespace = n.o
 IMPORT FOREIGN SCHEMA import_source LIMIT TO (imported_table_1) FROM SERVER multicorn_srv INTO import_dest1;
 NOTICE:  IMPORT import_source FROM srv {} OPTIONS {} RESTRICTION: limit ['imported_table_1']
 SELECT relname FROM pg_class c INNER JOIN pg_namespace n on c.relnamespace = n.oid WHERE n.nspname = 'import_dest1' ORDER BY relname;
-     relname      
+     relname
 ------------------
  imported_table_1
  imported_table_2
 (2 rows)
+
+
+
+
 
 DROP EXTENSION multicorn cascade;
 NOTICE:  drop cascades to 3 other objects
