@@ -50,8 +50,8 @@ on:
       - 'flake.lock'
 
 jobs:
-  run_tests:
-    name: run tests
+  update_cache:
+    name: Update allPostgresWithPlPython Cache
     runs-on: ubuntu-latest
 
     steps:
