@@ -22,6 +22,7 @@ jobs:
           trusted_public_keys: mfenniak-multicorn2-nix-cache:mldk0J26tzkCmqihQKOiyuAm1HAs2CHdIZC0ESr56ZA=
 
       - run: cat /home/runner/work/_temp/setup-nix-cache-action-*/post-build-hook
+      - run: cat /etc/nix/nix.conf
 
       # Run all the tests.
       - run: nix build .#allTestSuites
