@@ -25,7 +25,7 @@ jobs:
       # and no secret_keys input, it still tries to create a post-build-hook that will push packages to the cache.  This
       # is a hacky workaround to remove that hook.
       - run: sudo cat /home/runner/work/_temp/setup-nix-cache-action-*/post-build-hook
-      - run: sudo find /home/runner/work/_temp -type f -name 'setup-nix-cache-action-*' -exec truncate -s 0 {} +
+      - run: sudo find /home/runner/work/_temp -type d -name 'setup-nix-cache-action-*' -exec sh -c 'truncate -s 0 "$1"/post-build-hook' _ {} \;
       - run: sudo cat /home/runner/work/_temp/setup-nix-cache-action-*/post-build-hook
 
       # Run all the tests.
