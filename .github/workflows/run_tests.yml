@@ -24,7 +24,7 @@ jobs:
       # Seems to be a bug in setup-nix-cache-action where, even though we're only providing a trusted_public_keys input
       # and no secret_keys input, it still tries to create a post-build-hook that will push packages to the cache.  This
       # is a hacky workaround to remove that hook.
-      - run: rm /home/runner/work/_temp/setup-nix-cache-action-*/post-build-hook
+      - run: sudo rm /home/runner/work/_temp/setup-nix-cache-action-*/post-build-hook
 
       # Run all the tests.
       # - run: nix build .#allTestSuites # FIXME: temp for testing speed
