@@ -20,6 +20,7 @@ jobs:
         with:
           substituters: s3://mfenniak-multicorn2-nix-cache?region=us-west-2
           trusted_public_keys: mfenniak-multicorn2-nix-cache:mldk0J26tzkCmqihQKOiyuAm1HAs2CHdIZC0ESr56ZA=
+          secret_keys: null
 
       - run: cat /home/runner/work/_temp/setup-nix-cache-action-*/post-build-hook
       - run: cat /etc/nix/nix.conf
